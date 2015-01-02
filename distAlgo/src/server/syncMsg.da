@@ -1,0 +1,155 @@
+import sys
+import random
+
+class Server(process):
+    def setup(ps,i,n):
+        self.head=ps[0]
+        self.tail=ps[n-1]
+
+        if(i==0):
+           self.type="HEAD"
+           output("head")
+        elif(i<n-1):
+           self.type="INTERNAL"
+        else:
+           self.type="TAIL"
+        self.accountInfo = {'1234': 20,'2345':500}
+        self.ProcessedTrans = {}
+
+    def receive(msg=('sync', self.id,accNum, bal,client,reqId,outcome,op)):
+        #output("finally %r."%(selfId))
+        if(accNum not in accountInfo):
+             createAccount(accNum)
+        accountInfo[accNum]=bal
+        #output("finally updated %r."%(bal))
+        sync(accNum,bal,client,reqId,outcome,op)
+
+    def sync(accNum,bal,client,reqId,outcome,op):
+        #output("sync func")
+        ProcessedTrans[reqId]=[accNum,bal,op]
+        #output("Processed Transactions %r"%(ProcessedTrans))
+        if i<n-1:
+           next= ps[i+1]
+        else: 
+           next=0
+        if(next!=0):
+           send(('sync',self.id,accNum,bal,client,reqId,outcome,op), to=next)
+        else: 
+           send(('reply',reqId,outcome,bal),to=client)
+         
+
+    def receive(msg=('getbalance',reqId,accNum),from_=p):
+        if(accNum not in accountInfo):
+             createAccount(accNum)
+        balance=accountInfo[accNum]
+        output("balance is %r."%(balance))
+        #sync(accId,balance,p,reqId,'')
+    
+    def validateRequest(reqId,accNum,outcome,op):
+         if(reqId not in ProcessedTrans):
+             return "new"
+         elif(reqId in ProcessedTrans):
+             val=ProcessedTrans[reqId]
+             if(val[0]==accNum and val[2]==op):
+                 return "Processed"
+             else:
+                 return "InconsistentWithHistory"    
+
+
+    def receive(msg=('withdrawal',reqId,accNum,amt),from_=p):
+        if(accNum not in accountInfo):
+             createAccount(accNum)
+        balance=accountInfo[accNum]
+        outcome=''
+        reqState=validateRequest(reqId,accNum,outcome,'withdrawal')
+        if(reqState=="new"):
+            if(balance<amt):
+                outcome='Insufficient Funds'
+            else:    
+                balance=balance-amt
+        else:
+             outcome=reqState
+        sync(accNum,balance,p,reqId,outcome,'withdrawal')
+
+    def createAccount(accNum):
+        accountInfo[accNum]=0
+
+    def receive(msg=('deposit',reqId,accNum,amt),from_=p):
+        #output("receive deposit")
+        if(accNum not in accountInfo):
+             createAccount(accNum)
+        balance=accountInfo[accNum]
+        balance=balance+amt
+        accountInfo[accNum]=balance
+        outcome='Processed'
+        sync(accNum,balance,p,reqId,outcome,'deposit')   
+        
+    def main():
+        if(type=='HEAD'):
+        	await(some(received(('deposit',reqId,accNum,amt),from_=p)))
+        else:
+            await(some(received(('sync',self.id,accNum,bal,client,reqId,outcome,op))))
+        output("OMG")
+        #f=self.id
+        #output("Leader is %r."%(f))
+
+class Client(process):
+    def setup(head,tail):
+         self.accNum=''
+         self.bankName=''
+         self.balance=0
+         self.reqId=0
+    
+    def initializeMyAccDetails():
+         accNum='123412'
+         bankName='CitiBank'
+         balance=20
+    
+    def generateReqId():
+         seqNum=random.randint(0,500)
+         reqId=accNum+':'+'1'+':'+ str(seqNum)
+         output("hooo reqId.%r"%(reqId))
+
+    def getBalance():
+        generateReqId()
+        send(('getbalance',reqId,accNum,),to=tail) 
+    
+    def doWithdrawal():
+        output("doing withdrawal")
+        generateReqId()
+        #accNum='123412'
+        send(('withdrawal',reqId,accNum,300,),to=head)
+
+    def doDeposit():
+        output("doing deposit")
+        generateReqId()
+        #accNum='12321'
+        send(('deposit',reqId,accNum,300,),to=head)
+
+    def receive(msg=('reply',reqId,outcome,bal)):
+        output("balance.%r,%s,%r"%(reqId,outcome,bal))
+
+    def main():
+        initializeMyAccDetails()
+        #getBalance()
+        doWithdrawal()
+        doDeposit()
+        await(some(received(('reply',bal),)))
+        #await(each(cli in clients, has= received(('reply',))))
+        output("receive deposit from client")
+
+def main():
+    n = int(sys.argv[1]) if len(sys.argv) > 1 else 3
+    config(channel="fifo")
+    #server = new(Server,[n])
+    config(clock='Lamport')
+    ps = list(new(Server, num= n))
+    clients = new(Client,num=1)
+    setup(clients,[ps[0],ps[n-1]])
+    for i, p in enumerate(ps):
+       setup(p,[ps,i,n])
+    start(ps)
+    start(clients)
+    print("receive in Main")
+
+

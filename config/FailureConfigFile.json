@@ -1,0 +1,13 @@
+{
+  "CitiBank": [
+        {
+            "FailureType" : "TAIL",
+            "sendSeqNum"  : "1",
+            "index"   : "4"
+        },
+        {
+            "FailureType" : "TailDelay",
+            "index" : "4"
+        }
+      ]
+}

@@ -1,0 +1,52 @@
+{
+  "CitiBank": [
+        {
+          "ServerId" : "0",
+          "Host": "localhost",
+          "Port":"8071",
+          "UDPPort":"8071",
+          "ServerType":"HEAD",
+          "BankName":"CitiBank"
+        },
+        {
+          "ServerId" : "1",
+          "Host": "localhost",
+          "Port":"8092",
+          "UDPPort":"8090",
+          "ServerType":"INTERNAL",
+          "BankName":"CitiBank"
+        },
+        {
+          "ServerId" : "2",
+          "Host": "localhost",
+          "Port":"8072",
+          "UDPPort":"8076",
+          "ServerType":"INTERNAL",
+          "BankName":"CitiBank"
+        },
+        {
+          "ServerId" : "3",
+          "Host": "localhost",
+          "Port":"8073",
+          "UDPPort":"8077",
+          "ServerType":"INTERNAL",
+          "BankName":"CitiBank"
+        },
+        {
+          "ServerId" : "4",
+          "Host": "localhost",
+          "Port":"8054",
+          "UDPPort":"8075",
+          "ServerType":"TAIL",
+          "BankName":"CitiBank"
+        },
+        {
+          "ServerId" : "5",
+          "Host": "localhost",
+          "Port":"8010",
+          "UDPPort":"8031",
+          "ServerType":"NEWNODE",
+          "BankName":"CitiBank"
+        }
+      ]
+}

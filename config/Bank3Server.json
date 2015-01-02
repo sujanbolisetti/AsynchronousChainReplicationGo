@@ -1,0 +1,32 @@
+{
+  "serverConfig": [ {
+          "ServerId" : "1",
+          "Host": "localhost",
+          "Port":"7071",
+          "ServerType":"HEAD",
+          "BankName":"ICICIBank"
+        },
+        {
+          "ServerId" : "2",
+          "Host": "localhost",
+          "Port":"7072",
+          "ServerType":"INTERNAL",
+          "BankName":"ICICIBank"
+        },
+        {
+          "ServerId" : "3",
+          "Host": "localhost",
+          "Port":"7073",
+          "ServerType":"INTERNAL",
+          "BankName":"ICICIBank"
+        },
+        {
+          "ServerId" : "4",
+          "Host": "localhost",
+          "Port":"7074",
+          "UDPPort":"7075",
+          "ServerType":"TAIL",
+          "BankName":"ICICIBank"
+        }
+  ]
+}

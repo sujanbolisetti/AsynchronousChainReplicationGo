@@ -1,0 +1,9 @@
+{
+  "CitiBank": [
+        {
+            "FailureType" : "INTERNAL",
+            "SendSeqNum"  : "1",
+            "Index"   : "3"
+        }
+      ]
+}

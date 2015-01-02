@@ -1,0 +1,189 @@
+{
+    "Servers": [":8071",":8072",":8073",":8074",":8075",":8076",":8077","8078","8079"],
+    "Clients": ["GroupA"],
+    "Banks": ["Citi Bank","HDFC Bank"],
+    "Lengthofbankchain1": ["5"]
+}
+
+/*
+  have to write the description of each request and have to understand the calling convention of the clients
+  and running of the program
+  Eg : (getBalance, 1.1.1, 46).
+
+  Have to write the log file also
+  Have to design the servers in a way they will be knowing the next and previous
+*/
+
+{
+  "Bank1" :{
+    "Name":"CitiBank",
+    "Servers": [
+        {
+          "host": "localhost",
+          "port":8071,
+          "serverType":"HEAD"
+        }
+        {
+          "host":"localhost",
+          "port":8072,
+          "serverType":"INTERNAL"
+        }
+        {
+          "host":"localhost",
+          "port":8073,
+          "serverType":"INTERNAL"
+        }
+        {
+          "host" :"localhost",
+          "port":8074,
+          "serverType":"tail"
+        }
+      ],
+      "Clients":[
+        {
+          "host":"localhost",
+          "port":10001,
+          "clientId":1
+        }
+        {
+          "host":"localhost",
+          "port":10002,
+          "clientId":2
+        }
+        {
+          "host":"localhost",
+          "port":10003,
+          "clientId":3
+        }
+        {
+          "host":"localhost",
+          "port":10004,
+          "clientId":4
+        }
+        {
+          "host":"localhost",
+          "port":10005,
+          "clientId":5
+        }
+        {
+          "host":"localhost",
+          "port":10006,
+          "clientId":6
+        }
+      ]
+  },
+  "Bank2":{
+    "Name":"JPMorgan",
+    "Servers": [
+        {
+          "host": "localhost",
+          "port":8075,
+          "serverType":"HEAD"
+        }
+        {
+          "host":"localhost",
+          "port":8076,
+          "serverType":"INTERNAL"
+        }
+        {
+          "host":"localhost",
+          "port":8077,
+          "serverType":"INTERNAL"
+        }
+        {
+          "host" :"localhost",
+          "port":8078,
+          "serverType":"tail"
+        }
+      ],
+      "Clients":[
+        {
+          "host":"localhost",
+          "port":10007,
+          "clientId":1
+        }
+        {
+          "host":"localhost",
+          "port":10008,
+          "clientId":2
+        }
+        {
+          "host":"localhost",
+          "port":10009,
+          "clientId":3
+      }
+        {
+          "host":"localhost",
+          "port":10010,
+          "clientId":4
+        }
+        {
+          "host":"localhost",
+          "port":10011,
+          "clientId":5
+        }
+        {
+          "host":"localhost",
+          "port":10012,
+          "clientId":6
+        }
+      ]
+  },
+  "Bank3":{
+    "Name":"JPMorgan",
+    "Servers": [
+        {
+          "host": "localhost",
+          "port":8079,
+          "serverType":"HEAD"
+        }
+        {
+          "host":"localhost",
+          "port":8080,
+          "serverType":"INTERNAL"
+        }
+        {
+          "host":"localhost",
+          "port":8081,
+          "serverType":"INTERNAL"
+        }
+        {
+          "host" :"localhost",
+          "port":8082,
+          "serverType":"tail"
+        }
+      ],
+      "Clients":[
+        {
+          "host":"localhost",
+          "port":10013,
+          "clientId":1
+        }
+        {
+          "host":"localhost",
+          "port":10014,
+          "clientId":2
+        }
+        {
+          "host":"localhost",
+          "port":10015,
+          "clientId":3
+      }
+        {
+          "host":"localhost",
+          "port":10016,
+          "clientId":4
+        }
+        {
+          "host":"localhost",
+          "port":10017,
+          "clientId":5
+        }
+        {
+          "host":"localhost",
+          "port":10018,
+          "clientId":6
+        }
+      ]
+  }
+}

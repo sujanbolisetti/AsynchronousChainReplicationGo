@@ -1,0 +1,29 @@
+{
+  "Requests" : [
+  {
+    "ReqId" : "1231251232.1.42",
+    "AccountNumber" : "1231251232",
+    "Operation" : "Query"
+  },
+  {
+    "ReqId" : "1231251232.1.43",
+    "AccountNumber" : "1231251232",
+    "Operation" : "Deposit",
+    "Amt" : "500"
+  },
+  {
+    "ReqId" : "1231251232.1.44",
+    "AccountNumber" : "1231251232",
+    "Operation" : "Transfer",
+    "Amt"       : "300",
+    "DestBank"  : "JPMORGAN",
+    "DestAccount" : "123441242"
+  },
+  {
+    "ReqId" : "1231251232.1.45",
+    "AccountNumber" : "1231251232",
+    "Operation" : "Withdrawal",
+    "Amt" : "100"
+  }
+  ]
+}

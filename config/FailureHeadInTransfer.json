@@ -1,0 +1,10 @@
+{
+  "Failures": [
+        {
+            "FailureType" : "FailOnTransfer",
+            "BankName"  : "CitiBank",
+            "SendSeqNum"  : "3",
+            "Index" : "0"
+        }
+   	]
+ }

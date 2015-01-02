@@ -1,0 +1,207 @@
+2014/10/09 00:03:12 Received  Sequence Number: 1   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 00:03:12 Connecting to the succesor
+
+2014/10/09 00:03:12 Send  Sequence Number: 1   {predecessor}
+2014/10/09 00:03:12 Send  Sequence Number: 2   {Abhinav 4500 current 123451234}
+2014/10/09 00:03:12 Send  Sequence Number: 3   {predecessor 123424:Bank1:0 Processed withDrawal}
+2014/10/09 00:50:13 Received  Sequence Number: 2   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 00:50:13 Connecting to the succesor
+
+2014/10/09 00:50:13 Send  Sequence Number: 4   {predecessor}
+2014/10/09 00:50:13 Send  Sequence Number: 5   {Abhinav 4000 current 123451234}
+2014/10/09 00:50:13 Send  Sequence Number: 6   {predecessor 123424:Bank1:0 Processed withDrawal}
+2014/10/09 13:55:18 Received  Sequence Number: 1   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 13:55:18 Connecting to the succesor
+
+2014/10/09 13:56:06 Received  Sequence Number: 1   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 13:56:06 Connecting to the succesor
+
+2014/10/09 13:56:06 Send  Sequence Number: 1   {predecessor}
+2014/10/09 13:56:06 Send  Sequence Number: 2   {Abhinav 4500 current 123451234}
+2014/10/09 13:56:07 Send  Sequence Number: 3   {predecessor 123424:Bank1:0 Processed withDrawal}
+2014/10/09 13:56:54 Received  Sequence Number: 1   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 13:56:54 Connecting to the succesor
+
+2014/10/09 13:56:54 Send  Sequence Number: 1   {predecessor}
+2014/10/09 13:56:54 Send  Sequence Number: 2   {Abhinav 4500 current 123451234}
+2014/10/09 13:56:54 Send  Sequence Number: 3   {predecessor 123424:Bank1:0 Processed withDrawal}
+2014/10/09 13:59:57 Received  Sequence Number: 1   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 13:59:57 Connecting to the succesor
+
+2014/10/09 13:59:57 Send  Sequence Number: 1   {predecessor}
+2014/10/09 13:59:57 Send  Sequence Number: 2   {Abhinav 4500 current 123451234}
+2014/10/09 13:59:57 Send  Sequence Number: 3   {predecessor 123424:Bank1:0 Processed withDrawal}
+2014/10/09 14:04:01 Received  Sequence Number: 1   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 14:04:01 Connecting to the succesor
+
+2014/10/09 14:04:01 Send  Sequence Number: 1   {predecessor}
+2014/10/09 14:04:01 Send  Sequence Number: 2   {Abhinav 4500 current 123451234}
+2014/10/09 14:04:01 Send  Sequence Number: 3   {predecessor 123424:Bank1:0 Processed withDrawal}
+2014/10/09 14:08:56 Received  Sequence Number: 1   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 14:08:56 Connecting to the succesor
+
+2014/10/09 14:08:56 Send  Sequence Number: 1   {predecessor}
+2014/10/09 14:08:57 Send  Sequence Number: 2   {Abhinav 4500 current 123451234}
+2014/10/09 14:08:57 Send  Sequence Number: 3   {predecessor 123424:Bank1:0 Processed withDrawal}
+2014/10/09 14:11:44 Received  Sequence Number: 1   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 14:11:44 Connecting to the succesor
+
+2014/10/09 14:11:44 Send  Sequence Number: 1   {predecessor}
+2014/10/09 14:11:44 Send  Sequence Number: 2   {Abhinav 4500 current 123451234}
+2014/10/09 14:11:44 Send  Sequence Number: 3   {predecessor 123424:Bank1:0 Processed withDrawal}
+2014/10/09 14:12:04 Received  Sequence Number: 2   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 14:12:04 Connecting to the succesor
+
+2014/10/09 14:12:04 Send  Sequence Number: 4   {predecessor}
+2014/10/09 14:12:04 Send  Sequence Number: 5   {Abhinav 4000 current 123451234}
+2014/10/09 14:12:04 Send  Sequence Number: 6   {predecessor 123424:Bank1:0 Processed withDrawal}
+2014/10/09 14:16:13 Received  Sequence Number: 1   {123424:Bank1:0 123451234 withDrawal 500}
+2014/10/09 14:16:13 Connecting to the succesor
+
+2014/10/09 14:16:13 Send  Sequence Number: 1   {predecessor}
+2014/10/09 14:16:13 Send  Sequence Number: 2   {Abhinav 4500 current 123451234}
+2014/10/09 14:16:13 Send  Sequence Number: 3   {predecessor 123424:Bank1:0 Processed withDrawal}
+2014/10/09 14:16:20 Received  Sequence Number: 2   {123424:Bank1:0 123451234 deposit 500}
+2014/10/09 14:16:20 Connecting to the succesor
+
+2014/10/09 14:16:20 Send  Sequence Number: 4   {predecessor}
+2014/10/09 14:16:20 Send  Sequence Number: 5   {Abhinav 5000 current 123451234}
+2014/10/09 14:16:20 Send  Sequence Number: 6   {predecessor 123424:Bank1:0 Processed deposit}
+2014/10/09 14:17:12 Received  Sequence Number: 3   {123424:Bank1:0 123451234 deposit 500}
+2014/10/09 14:17:12 Connecting to the succesor
+
+2014/10/09 14:17:12 Send  Sequence Number: 7   {predecessor}
+2014/10/09 14:17:12 Send  Sequence Number: 8   {Abhinav 5500 current 123451234}
+2014/10/09 14:17:13 Send  Sequence Number: 9   {predecessor 123424:Bank1:0 Processed deposit}
+2014/10/09 16:02:53 Received  Sequence Number: 1   {123424:Bank1:0 123451234 deposit 500}
+2014/10/09 16:02:53 Connecting to the succesor
+
+2014/10/09 16:02:53 Send  Sequence Number: 1   {predecessor}
+2014/10/09 16:02:53 Send  Sequence Number: 2   {Abhinav 5500 current 123451234}
+2014/10/09 16:02:53 Send  Sequence Number: 3   {predecessor 123424:Bank1:0  deposit}
+2014/10/09 16:06:12 Received  Sequence Number: 2   {123424:Bank1:0 123451234 deposit 6500}
+2014/10/09 16:06:12 Connecting to the succesor
+
+2014/10/09 16:06:12 Send  Sequence Number: 4   {predecessor}
+2014/10/09 16:06:12 Send  Sequence Number: 5   {Abhinav 5500 current 123451234}
+2014/10/09 16:06:12 Send  Sequence Number: 6   {predecessor 123424:Bank1:0 Inconsistent With History deposit}
+2014/10/09 16:09:41 Received  Sequence Number: 1   {123424:Bank1:0 123451234 deposit 6500}
+2014/10/09 16:09:41 Connecting to the succesor
+
+2014/10/09 16:09:41 Send  Sequence Number: 1   {predecessor}
+2014/10/09 16:09:41 Send  Sequence Number: 2   {Abhinav 11500 current 123451234}
+2014/10/09 16:09:41 Send  Sequence Number: 3   {predecessor 123424:Bank1:0  deposit}
+2014/10/09 16:10:01 Received  Sequence Number: 2   {123424:Bank1:0 123451234 withDrawal 6500}
+2014/10/09 16:10:01 Connecting to the succesor
+
+2014/10/09 16:10:01 Send  Sequence Number: 4   {predecessor}
+2014/10/09 16:10:01 Send  Sequence Number: 5   {Abhinav 11500 current 123451234}
+2014/10/09 16:10:01 Send  Sequence Number: 6   {predecessor 123424:Bank1:0 Inconsistent With History withDrawal}
+2014/10/09 16:13:59 Received  Sequence Number: 3   {123424:1:0 123451234 withDrawal 6500}
+2014/10/09 16:13:59 Connecting to the succesor
+
+2014/10/09 16:13:59 Send  Sequence Number: 7   {predecessor}
+2014/10/09 16:13:59 Send  Sequence Number: 8   {Abhinav 5000 current 123451234}
+2014/10/09 16:13:59 Send  Sequence Number: 9   {predecessor 123424:1:0 Processed withDrawal}
+2014/10/09 16:15:51 Received  Sequence Number: 4   { 123451234 withDrawal 6500}
+2014/10/09 16:15:51 Connecting to the succesor
+
+2014/10/09 16:15:51 Send  Sequence Number: 10   {predecessor}
+2014/10/09 16:15:51 Send  Sequence Number: 11   {Abhinav 5000 current 123451234}
+2014/10/09 16:15:51 Send  Sequence Number: 12   {predecessor  Processed withDrawal}
+2014/10/09 16:16:23 Received  Sequence Number: 5   { 123451234 withDrawal 6500}
+2014/10/09 16:16:23 Connecting to the succesor
+
+2014/10/09 16:16:23 Send  Sequence Number: 13   {predecessor}
+2014/10/09 16:16:23 Send  Sequence Number: 14   {Abhinav 5000 current 123451234}
+2014/10/09 16:16:23 Send  Sequence Number: 15   {predecessor  Inconsistent With History withDrawal}
+2014/10/09 16:33:24 Received  Sequence Number: 6   {123424:1:117 123451234 withDrawal 6500}
+2014/10/09 16:33:24 Connecting to the succesor
+
+2014/10/09 16:33:24 Send  Sequence Number: 16   {predecessor}
+2014/10/09 16:33:24 Send  Sequence Number: 17   {Abhinav 5000 current 123451234}
+2014/10/09 16:33:24 Send  Sequence Number: 18   {predecessor 123424:1:117 Processed withDrawal}
+2014/10/09 16:35:39 Received  Sequence Number: 1   {123424:1:117 123451234 withDrawal 6500}
+2014/10/09 16:35:39 Connecting to the succesor
+
+2014/10/09 16:35:39 Send  Sequence Number: 1   {predecessor}
+2014/10/09 16:35:39 Send  Sequence Number: 2   {Abhinav 5000 current 123451234}
+2014/10/09 16:35:39 Send  Sequence Number: 3   {predecessor 123424:1:117 Processed withDrawal}
+2014/10/09 16:36:09 Received  Sequence Number: 2   {123424:1:117 123451234 withDrawal 6500}
+2014/10/09 16:36:09 Connecting to the succesor
+
+2014/10/09 16:36:09 Send  Sequence Number: 4   {predecessor}
+2014/10/09 16:36:09 Send  Sequence Number: 5   {Abhinav 5000 current 123451234}
+2014/10/09 16:36:09 Send  Sequence Number: 6   {predecessor 123424:1:117 Inconsistent With History withDrawal}
+2014/10/09 16:44:00 Received  Sequence Number: 3   {123424:1:112 123451234 deposit 6500}
+2014/10/09 16:44:00 Connecting to the succesor
+
+2014/10/09 16:44:00 Send  Sequence Number: 7   {predecessor}
+2014/10/09 16:44:00 Send  Sequence Number: 8   {Abhinav 11500 current 123451234}
+2014/10/09 16:44:00 Send  Sequence Number: 9   {predecessor 123424:1:112 Processed deposit}
+2014/10/09 16:44:03 Received  Sequence Number: 4   {123424:1:370 123451234 deposit 6500}
+2014/10/09 16:44:03 Connecting to the succesor
+
+2014/10/09 16:44:03 Send  Sequence Number: 10   {predecessor}
+2014/10/09 16:44:04 Send  Sequence Number: 11   {Abhinav 18000 current 123451234}
+2014/10/09 16:44:04 Send  Sequence Number: 12   {predecessor 123424:1:370 Processed deposit}
+2014/10/09 16:44:15 Received  Sequence Number: 5   {123424:1:269 123451234 withDrawal 6500}
+2014/10/09 16:44:15 Connecting to the succesor
+
+2014/10/09 16:44:15 Send  Sequence Number: 13   {predecessor}
+2014/10/09 16:44:15 Send  Sequence Number: 14   {Abhinav 11500 current 123451234}
+2014/10/09 16:44:15 Send  Sequence Number: 15   {predecessor 123424:1:269 Processed withDrawal}
+2014/10/09 16:44:18 Received  Sequence Number: 6   {123424:1:33 123451234 deposit 6500}
+2014/10/09 16:44:18 Connecting to the succesor
+
+2014/10/09 16:44:18 Send  Sequence Number: 16   {predecessor}
+2014/10/09 16:44:18 Send  Sequence Number: 17   {Abhinav 18000 current 123451234}
+2014/10/09 16:44:18 Send  Sequence Number: 18   {predecessor 123424:1:33 Processed deposit}
+2014/10/09 16:44:20 Received  Sequence Number: 7   {123424:1:146 123451234 withDrawal 6500}
+2014/10/09 16:44:20 Connecting to the succesor
+
+2014/10/09 16:44:20 Send  Sequence Number: 19   {predecessor}
+2014/10/09 16:44:20 Send  Sequence Number: 20   {Abhinav 11500 current 123451234}
+2014/10/09 16:44:20 Send  Sequence Number: 21   {predecessor 123424:1:146 Processed withDrawal}
+2014/10/09 16:44:28 Received  Sequence Number: 8   {123424:1:472 123451234 withDrawal 6500}
+2014/10/09 16:44:28 Connecting to the succesor
+
+2014/10/09 16:44:28 Send  Sequence Number: 22   {predecessor}
+2014/10/09 16:44:28 Send  Sequence Number: 23   {Abhinav 5000 current 123451234}
+2014/10/09 16:44:28 Send  Sequence Number: 24   {predecessor 123424:1:472 Processed withDrawal}
+2014/10/09 16:44:37 Received  Sequence Number: 9   {123424:1:344 123451234 withDrawal 6500}
+2014/10/09 16:44:37 Connecting to the succesor
+
+2014/10/09 16:44:37 Send  Sequence Number: 25   {predecessor}
+2014/10/09 16:44:38 Send  Sequence Number: 26   {Abhinav 5000 current 123451234}
+2014/10/09 16:44:38 Send  Sequence Number: 27   {predecessor 123424:1:344 Processed withDrawal}
+2014/10/09 16:45:54 Received  Sequence Number: 1   {123424:1:377 123451234 withDrawal 6500}
+2014/10/09 16:45:54 Connecting to the succesor
+
+2014/10/09 16:45:54 Send  Sequence Number: 1   {predecessor}
+2014/10/09 16:45:54 Send  Sequence Number: 2   {Abhinav 5000 current 123451234}
+2014/10/09 16:45:54 Send  Sequence Number: 3   {predecessor 123424:1:377 Insufficient Funds withDrawal}
+2014/10/11 02:21:55 Received  Sequence Number: 1   {123424:1:5 123451234 withDrawal 6500}
+2014/10/11 02:21:55 Connecting to the succesor
+
+2014/10/11 02:21:55 Send  Sequence Number: 1   {predecessor}
+2014/10/11 02:21:55 Send  Sequence Number: 2   {Abhinav 5000 current 123451234}
+2014/10/11 02:21:55 Send  Sequence Number: 3   {predecessor 123424:1:5 Insufficient Funds withDrawal}
+2014/10/11 02:22:22 Received  Sequence Number: 2   {123424:1:92 123451234 withDrawal 6500}
+2014/10/11 02:22:22 Connecting to the succesor
+
+2014/10/11 02:22:22 Send  Sequence Number: 4   {predecessor}
+2014/10/11 02:22:22 Send  Sequence Number: 5   {Abhinav 5000 current 123451234}
+2014/10/11 02:22:22 Send  Sequence Number: 6   {predecessor 123424:1:92 Insufficient Funds withDrawal}
+2014/10/11 02:22:36 Received  Sequence Number: 3   {123424:1:387 123451234 deposit 6500}
+2014/10/11 02:22:36 Connecting to the succesor
+
+2014/10/11 02:22:36 Send  Sequence Number: 7   {predecessor}
+2014/10/11 02:22:36 Send  Sequence Number: 8   {Abhinav 11500 current 123451234}
+2014/10/11 02:22:36 Send  Sequence Number: 9   {predecessor 123424:1:387 Insufficient Funds deposit}
+2014/10/11 02:28:34 Received  Sequence Number: 1   {123424:1:11 123451234 deposit 6500}
+2014/10/11 02:28:34 Connecting to the succesor
+
+2014/10/11 02:28:34 Send  Sequence Number: 1   {predecessor}
+2014/10/11 02:28:34 Send  Sequence Number: 2   {Abhinav 11500 current 123451234}
+2014/10/11 02:28:34 Send  Sequence Number: 3   {predecessor 123424:1:11 Processed deposit}

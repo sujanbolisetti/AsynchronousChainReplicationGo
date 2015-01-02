@@ -1,0 +1,11 @@
+{
+  "CitiBank": [
+        {
+            "FailureType" : "NEWNODE",
+            "SendSeqNum"  : "2"
+        }
+        {
+            "FailureType" : "TailDelay"
+        }
+      ]
+}

@@ -1,0 +1,556 @@
+import sys
+import random
+import xml.etree.ElementTree as xmlTree
+import json
+import _thread
+import time
+import threading
+
+
+# have to write the comments for the files
+
+
+#isNewServerAlive = True
+
+
+class Master(process):
+
+    def setup(ps,clients,processType,num):
+        
+        self.clients = clients
+        #self.processType = {}
+        self.head = ps[0]
+        self.tail = ps[num-1]
+        self.NewNode = 0
+        self.isAliveRecord = {}
+        self.processType = processType
+        self.hasSentMsg = 0
+        self.IsNewNodeCame = False
+
+    def notifyClients(msg, newNode):
+        if msg == 'updateHead':
+            output("notifyclients1")
+            send(('updateHeadinClient', newNode), to=clients)
+        else:
+            output("notifyclients2 %r."%clients)
+            send(('updateTailinClient', newNode), to=clients)
+
+    def receive(msg=('addNewTailinMaster',prev, newNode), from_=p):
+        output("addNewTailinMaster tail = %r"%(prev))
+        #send(('checkVariables'), to=ps)
+        tail = newNode
+        processType[newNode]="TAIL"
+        processType[prev]="INTERNAL"
+        send(('newTailtoClients', newNode), to=clients)
+
+
+    def receive(msg=('chainExtension', newNode), from_=p):
+        output("chainExtension newnode = %r"%(newNode))
+        isAliveRecord.update({newNode:[0,0]})
+        IsNewNodeCame = True
+        NewNode = newNode
+        if newNode not in ps:
+            ps.append(newNode)
+        output("tail Node %r %r"%(tail,len(ps)))
+        send(('addingNewNode',newNode), to=tail)
+
+
+    def initRecord(dict):
+        #output("process type %r",processType)
+        for i, p in enumerate(ps):
+            dict.update({ps[i]: [0,0]})
+
+        #self.isAliveRecord = dict
+        #output("length",len(ps))
+
+    def checkHeartBeatMsgs(threadName, delay):
+        #global isNewServerAlive
+        while True:
+             time.sleep(delay)
+             #output("process type %r",processType)
+             for i in range (0, len(ps)):
+                #output("output is Alive%r%r"%(isAliveRecord[ps[i]][0],isAliveRecord[ps[i]][1]))
+                if isAliveRecord[ps[i]][0] == 0 and isAliveRecord[ps[i]][1] != 1:
+                    #output("i value%r"%(i))
+                    isAliveRecord[ps[i]] = [0,1]
+                    if processType[ps[i]] == "HEAD":
+                        #output("You are caught")
+                        #newHead = ps[i+1]
+                        head = ps[i+1]
+                        send(('updateHead'), to=ps[i+1])
+                        notifyClients('updateHead', ps[i+1])
+                        #ps.remove(ps[i])
+                    elif processType[ps[i]] == "TAIL":
+                        tailId = ps[i-1]
+                        output("abhinav2")
+                        if(IsNewNodeCame):
+                            output("length in tail Id %r%r"%(len(ps),i))
+                            tailId = ps[i-1]
+                        tail = tailId
+                        send(('updateTail'), to=tailId)
+                        notifyClients('updateTail', tailId) 
+                        if(IsNewNodeCame):
+                            send(('sendRequestAgain'), to=NewNode)
+                    elif processType[ps[i]] == "INTERNAL":
+                        output("Internal has failed")
+                        prev = ps[i-1]
+                        succ = ps[i+1]
+                        if(isAliveRecord[ps[i-1]][1]!=0):
+                            output("Again Internal has Failed")
+                            prev=ps[i-2]
+                        if(isAliveRecord[ps[i+1]][1]!=0):
+                            succ = ps[i+2]
+                        send(("requestSeqNum",prev),to=succ)
+                    elif processType[ps[i]] == "NEWNODE":
+                        output("New Server Failed")
+                        #isNewServerAlive = False
+                        output("New Server value %r"%(self.id))
+
+                        #send(('newServerFailure'),to=tail)
+                        #hasSentMsg = 1
+                        
+             for i, p in enumerate(ps):
+                 isAliveRecord[ps[i]][0] = 0
+
+    
+    def receive(msg=('recvSeqNum',seqNum,predId,succId),from_=p):
+        output("Got the seqNum")
+        output("Is Alive Record %r"%(isAliveRecord))
+        send(("succSeqNum",seqNum,succId),to=predId)
+
+
+    def receive(msg=('heartbeatmsg', serverId), from_=p):
+        #output("inside master")
+        #output("*****%r."%(serverId))
+        isAliveRecord[serverId] = [1,0]
+
+    def main():
+        initRecord(self.isAliveRecord)
+        #output("%r."%(self.isAliveRecord))
+
+        _thread.start_new_thread(checkHeartBeatMsgs, ("Thread", 10))
+
+
+        await(some(received(('heartbeatmsg', self.id))))
+
+
+class Server(process):
+    def setup(prev, next, typ,master,index):
+        self.master=master
+        self.prev = prev
+        self.next = next
+        self.sentList = []
+        self.index = index
+        self.type = typ
+        self.sendSeq=0
+        self.newNodeCame = False
+        self.shouldIDie = False
+        self.failedIndexNum = -1
+        self.sleepNodeIndex = -1
+        self.recvSeq=0
+        self.isNewServerAlive = True
+        self.count = 0
+        self.tempTrans = {}
+        self.accountInfo = {}
+        self.ProcessedTrans = {}
+        self.failureInfo = {}
+        self.sentCount = 0
+
+
+    def receive(msg=('sendRequestAgain'), from_=p):
+        send(('chainExtension', self.id), to=master)
+
+
+
+    def receive(msg=("succSeqNum",seqNum,succId),from_=p):
+        if(index == failedIndexNum):
+           output("Successor also failed")
+           seqNum=-1
+           return
+        if(seqNum >=0 and len(sentList)>0):
+           if(seqNum>0):
+              seqNum = seqNum-1
+           tempList = sentList[seqNum:]
+           output("SeqList%r"%(tempList))
+           next = succId
+           for i in range(0,len(tempList)):
+               tempTrans.update({tempList[i]: ProcessedTrans[tempList[i]]})
+        send(("remainingTrans",tempTrans,self.id),to=succId)
+    
+    def receive(msg=("remainingTrans",tempTrans,self.id),from_=p):
+        #output("failed Index node %r"%(failedIndexNum))
+        if(index == failedIndexNum):
+              output("Successor also failed")
+              seqNum=-1
+              return
+        output("Updating the trans%r"%(tempTrans))
+        for key in tempTrans:
+            if key not in ProcessedTrans:
+                ProcessedTrans[key]=tempTrans[key]
+                sync(ProcessedTrans[key][0],ProcessedTrans[key][1],ProcessedTrans[key][4],key,ProcessedTrans[key][3],ProcessedTrans[key][2])
+
+
+    def receive(msg=("requestSeqNum",predId),from_=p):
+        prev=predId
+        output("Sent my Seq Num%r"%(len(sentList)))
+        output("tail Address%r",self.id)
+        send(('recvSeqNum',len(sentList),predId,self.id), to=master)
+
+    def receive(msg=('addingNewNode', newNode), from_= p):
+        output("Came inside oldtail %r %r %r"%(self.newNodeCame,self.type,failedIndexNum))
+        if(newNodeCame):
+            output("Is New node came")
+            time.sleep(40)
+            isNewServerAlive=False
+        if(index == failedIndexNum):
+             output("came inside old failed tail")
+             time.sleep(4234234)
+        #await(some(received(('newServerFailure'),from_=p)))
+        output("New Server value %r %r"%(isNewServerAlive,self.id))
+        if(isNewServerAlive):
+             self.next=newNode
+             self.type = "INTERNAL"
+             send(('BecomeNewTail', ProcessedTrans, self.id, newNode), to=newNode)
+        else:
+             output("Hurray!!!!!!!!!1 I am still the Tail Hence Aborted Gracefully")
+
+    def receive(msg=('recoverTail', newTail),from_=p):
+        self.next = None        
+
+
+    #def receive(msg=('newServerFailure'),from_=p):
+         #output("I am still the Tail")
+         #isNewServerAlive=False       
+         #output("New Server value in Tail %r %r"%(isNewServerAlive,self.id))  
+
+    def receive(msg=('BecomeNewTail', ProcessedTrans, prev, newNode), from_=p):
+        #time.sleep(5)
+        self.type = "TAIL"
+        self.prev=prev
+        self.next = None
+        self.ProcessedTrans = ProcessedTrans 
+        send(('addNewTailinMaster', prev,newNode), to=master)
+
+    def receive(msg=('sync', self.id,accNum, bal,client,reqId,outcome,op)):
+        #output("New Server value %r %r"%(isNewServerAlive,self.id))
+        recvSeq = recvSeq+1
+        if(accNum not in accountInfo):
+             createAccount(accNum)
+        accountInfo[accNum]=bal
+        #output("finally updated %r."%(bal))
+        sync(accNum,bal,client,reqId,outcome,op)
+
+    def sync(accNum,bal,client,reqId,outcome,op):
+        #output("sync func")
+        ProcessedTrans[reqId]=[accNum,bal,op,outcome,client]
+        #output("Processed Transactions %r%r"%(ProcessedTrans,self.id))
+
+        if(index == failedIndexNum and count >= 1):
+            output("came here inside 3")
+            time.sleep(32424345435)
+
+        if(next!=None):
+           sentList.append(reqId) 
+           send(('sync',self.id,accNum,bal,client,reqId,outcome,op), to=next)
+           sendSeq = sendSeq+1
+
+        else: 
+           send(('reply',reqId,outcome,bal),to=client)
+           sendSeq = sendSeq+1
+           send(('removeSentList',reqId), to=prev)
+           sendSeq = sendSeq+1
+        count = count + 1
+
+    def receive(msg=('removeSentList', reqId), from_ = prev):
+        recvSeq = recvSeq+1
+        #output("before%r %r"%(self.id, prev))
+        if reqId in sentList and self.type != "TAIL":
+           sentList.remove(reqId) 
+           if self.prev != None :
+             send(('removeSentList',reqId), to=prev)
+             sendSeq = sendSeq+1
+        #output("after %r"%(len(sentList)))
+
+    def receive(msg=('getbalance',reqId,accNum),from_=p):
+        recvSeq = recvSeq+1
+        if(accNum not in accountInfo):
+             createAccount(accNum)
+        balance=accountInfo[accNum]
+        outcome="Processed"
+        send(('reply',reqId,outcome,balance),to=p)
+        sendSeq = sendSeq+1
+    
+    def validateRequest(reqId,accNum,outcome,op):
+         recvSeq = recvSeq+1
+         if reqId not in ProcessedTrans:
+             output("req id%r"%(reqId))
+             return "new"
+         elif(reqId in ProcessedTrans):
+             val=ProcessedTrans[reqId]
+             if(val[0]==accNum and val[2]==op):
+                 output("%r"%(val[3]))
+                 return val[3]
+             else:
+                 output("came here")
+                 return "InconsistentWithHistory"    
+
+    def receive(msg=('updateHead'),from_=p):
+        output("updating new head")
+        recvSeq = recvSeq+1
+        self.type = "HEAD"
+        prev=None
+        #output("ravichandra")
+
+    def receive(msg=('updateTail'),from_=p):
+        recvSeq = recvSeq+1
+        self.type = "TAIL"
+        next=None
+
+
+    def receive(msg=('withdrawal',reqId,accNum,amt),from_=p):
+        recvSeq = recvSeq+1
+        if(accNum not in accountInfo):
+             createAccount(accNum)
+        balance=accountInfo[accNum]
+        outcome=''
+        reqState=validateRequest(reqId,accNum,outcome,'Withdrawal')
+        if(reqState=="new"):
+            if(balance<amt):
+                outcome='Insufficient Funds'
+            else:    
+                balance=balance-amt
+                outcome='Processed'
+                accountInfo[accNum]=balance
+        else:
+             outcome=reqState
+        sync(accNum,balance,p,reqId,outcome,'Withdrawal')
+
+    def createAccount(accNum):
+        accountInfo[accNum]=0
+
+    def receive(msg=('deposit',reqId,accNum,amt),from_=p):
+        recvSeq = recvSeq+1
+        #output("receive deposit")
+        if(accNum not in accountInfo):
+             createAccount(accNum)
+        balance=accountInfo[accNum]
+        outcome=''
+        reqState=validateRequest(reqId,accNum,outcome,'Deposit')
+        if(reqState=="new"):
+              balance=balance+amt
+              outcome='Processed'
+              accountInfo[accNum]=balance
+        else:
+              outcome=reqState
+        sync(accNum,balance,p,reqId,outcome,'Deposit') 
+
+    def readFailureInfo():
+        filename = 'FailureConfigFile.json'
+        json_data=open(filename)
+        failureInfo = json.load(json_data)
+        output(failureInfo["CitiBank"][0]["FailureType"])
+        output(len(failureInfo["CitiBank"]))
+        json_data.close() 
+        
+    def sendHeartBeatMsg( threadName, delay, serverId, master):
+        #output("inside sendHeartBeatMsg")
+        output("Server Id %r."%(serverId))
+
+        while True:
+             time.sleep(delay)
+
+             for i in range(0,len(failureInfo["CitiBank"])):
+                curFailureType = failureInfo["CitiBank"][i]
+                indexNum = int(curFailureType["Index"])
+                seqNum = int(curFailureType["SendSeqNum"])
+                #output("length very imp%r%r%r" %(indexNum,sendSeq,self.type))
+                if(index == indexNum and sendSeq > seqNum and self.type == curFailureType["FailureType"]):
+                    output(" %r Failure"%(self.type))
+                    shouldIDie = True
+                    failedIndexNum = indexNum
+                    return
+                elif(index == indexNum and curFailureType["FailureType"] == "TailDelay"):
+                    newNodeCame = True
+                    sleepNodeIndex = indexNum
+                    #output("Came inside new Node failure%r %r %r"%(newNodeCame,self.type,sleepNodeIndex))
+
+
+             #if (index==2 and sendSeq>2):
+                #output("send inside wiered %r%r"%(sendSeq,self.id))
+                #break
+             #if(index==3 and sendSeq>5):
+                #output("send inside wiered %r%r"%(sendSeq,self.id))
+                #break
+
+             send(('heartbeatmsg', serverId),to=master)
+             sendSeq = sendSeq+1
+        
+    def main():
+        # TO DO : have to stop these servers
+        readFailureInfo()
+        #output("type %r %r"%(self.id,self.type))
+        if(self.type == "NEWNODE"):
+            time.sleep(15)
+            output("Extending the chain")
+            send(('chainExtension', self.id),to=master)
+
+        _thread.start_new_thread(sendHeartBeatMsg, ("Thread", 5, self.id, self.master))
+        
+
+        # Internal Server Failure Scenario
+        #if(self.type == "NEWNODE"):
+            #time.sleep(1203242)
+
+        if(type=='HEAD'):
+            await(some(received(('deposit',reqId,accNum,amt),from_=p)))
+        else:
+            await(some(received(('sync',self.id,accNum,bal,client,reqId,outcome,op))))
+
+class Client(process):
+    def setup(head,tail,clientId):
+        self.accNum=''
+        self.bankName=''
+        self.balance=0
+        self.reqId=0
+        self.receiveQueue = set()
+        self.data = ''
+    
+    def initializeMyAccDetails():
+        accNum='123452'
+        bankName='CitiBank'
+        balance=20
+    
+    def generateReqId():
+        seqNum=random.randint(0,500)
+        reqId=accNum+':'+'1'+ ':'+ str(seqNum)
+        output("hooo reqId.%r"%(reqId))
+
+    def receive(msg=('newTailtoClients', newNode)):
+        self.tail = newNode
+        output("updated the new tail in client%r"%(newNode))
+        #doDeposit("123456789.1.23", "123451232", 1000)
+
+    def getBalance(reqId, accNum):
+        #output("Balance")
+        send(('getbalance',reqId,accNum,),to=tail) 
+    
+    def doWithdrawal(reqId, accNum, amount):
+        #output("Withdrawal")
+        send(('withdrawal',reqId,accNum,amount,),to=head)
+
+    def doDeposit(reqId, accNum, amount):
+        #output("Deposit")
+        send(('deposit',reqId, accNum, amount, ),to=head)
+
+    def receive(msg=('reply',reqId,outcome,bal)):
+        output("<%r,%s,%r>"%(reqId,outcome,bal))
+        receiveQueue.add(reqId)
+
+    def receive(msg=('updateHeadinClient', newNode)):
+        self.head = newNode
+        output("newHead = %r"%newNode)
+        output("Updated the Head")
+        #doDeposit("123456789.1.21", "123451232", 1000)
+
+    def receive(msg=('updateTailinClient', newNode)):
+        self.tail = newNode
+        output("Updated the Tail Node")
+        #doDeposit("123456789.1.22", "123451232", 1000)
+
+    def sendRequests():
+        for i in range(0,len(data["Requests"])):
+            currReq=data["Requests"][i]
+            if(currReq["Operation"]=="Query"):
+                getBalance(currReq["ReqId"],currReq["AccountNumber"])
+                await(currReq["ReqId"] in receiveQueue)
+                receiveQueue.remove(currReq["ReqId"])
+            elif(currReq["Operation"]=="Withdrawal"):
+                doWithdrawal(currReq["ReqId"],currReq["AccountNumber"],int(currReq["Amt"])) 
+                await(currReq["ReqId"] in receiveQueue)
+                receiveQueue.remove(currReq["ReqId"])
+            elif(currReq["Operation"]=="Deposit"):
+                doDeposit(currReq["ReqId"],currReq["AccountNumber"],int(currReq["Amt"]))
+                await(currReq["ReqId"] in receiveQueue)
+                receiveQueue.remove(currReq["ReqId"])
+            else:
+                output("Sorry Requested Operation is not supported")
+                #currReq["Amt"]
+            output("I had sent the %r request"%(currReq["Operation"]))
+            time.sleep(20)
+
+    def readJsonConfig():
+        filename = 'client'+ str(clientId+1) + 'ReqInfo.json'
+        json_data=open(filename)
+        data = json.load(json_data)
+        output(data["Requests"][0]["ReqId"])
+        output(len(data["Requests"]))
+        json_data.close()
+
+
+    def main():
+        readJsonConfig()
+        sendRequests()
+        #output("receive deposit from client")
+
+def main():
+       filename = 'configdata.xml'
+       numMasters = 1
+       #read configuration file
+       tree = xmlTree.parse(filename)
+       root = tree.getroot()
+       config(channel="fifo") 
+       #read each of the bank details from config file
+       for bank in root.findall('bank'):
+          bankName=bank.get('name')
+          numClients=int(bank.find('./client').text)
+          numServers=int(bank.find('./server').get('chain'))
+          delayTime=int(bank.find('./server/delay').text)
+          newServers=int(bank.find('./ExtendingTheChain').text)
+          
+          ps = list(new(Server, num= numServers))
+          clients = new(Client,num=numClients)
+          master = new(Master, num=numMasters)
+          newServer = list(new(Server,num=newServers))
+          
+          for i, cli in enumerate(clients):
+             setup(cli,[ps[0],ps[numServers-1],i])
+
+          head = ps[0]
+          tail = ps[numServers-1]
+
+          processType = {}
+
+          for i, p in enumerate(ps):
+             if i == 0:
+                prev = None
+                next = ps[i+1]
+                typ = "HEAD"
+             elif i < numServers-1:
+                prev = ps[i-1]
+                next = ps[i+1]
+                typ = "INTERNAL"
+
+             else :
+                prev = ps[i-1]
+                next = None
+                typ = "TAIL"
+             processType[ps[i]] = typ
+             setup(p,[prev, next, typ,master,i])
+             
+          if(newServers>0):
+              print("came inside extension")
+              setup(newServer[0],[None,None,"NEWNODE",master,len(ps)]) 
+              processType[newServer[0]]="NEWNODE"  
+          
+
+          setup(master,[ps,clients,processType,numServers])
+          print(ps)
+          print(processType)
+
+
+          start(master)
+          start(ps)
+          start(clients)
+          if(newServers>0):
+              start(newServer)
+          print("receive in Main")

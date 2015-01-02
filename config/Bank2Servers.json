@@ -1,0 +1,23 @@
+{
+  "serverConfig": [ {
+          "host": "localhost",
+          "port":"8075",
+          "serverType":"HEAD"
+        },
+        {
+          "host": "localhost",
+          "port":"8076",
+          "serverType":"INTERNAL"
+        },
+        {
+          "host": "localhost",
+          "port":"8077",
+          "serverType":"INTERNAL"
+        },
+        {
+          "host": "localhost",
+          "port":"8078",
+          "serverType":"TAIL"
+        }
+  ]
+}

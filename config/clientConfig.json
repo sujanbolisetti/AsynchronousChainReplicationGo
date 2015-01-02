@@ -1,0 +1,49 @@
+{
+  "clientConfig" : [
+    {
+      "ClientId"   : "1",
+      "ClientHost" : "localhost",
+      "ClientPort" : "10004",
+      "ClientSendPort" : "10005",
+      "ClientMasPort" : "10006",
+      "BankName"   : "CitiBank"
+    },
+    {
+      "ClientId"   : "2",
+      "ClientHost" : "localhost",
+      "ClientPort" : "10016",
+      "ClientSendPort" : "10007",
+      "ClientMasPort" : "1011",
+      "BankName"   : "CitiBank"
+    },
+    {
+      "ClientId"   : "3",
+      "ClientHost" : "localhost",
+      "ClientPort" : "10008",
+      "ClientSendPort" : "10009",
+      "ClientMasPort" : "1021",
+      "BankName"   : "CitiBank"
+    },
+    {
+      "ClientId"   : "4",
+      "ClientHost" : "localhost",
+      "ClientPort" : "10010",
+      "ClientMasPort" : "1031",
+      "BankName"   : "CitiBank"
+    },
+    {
+      "ClientId"   : "5",
+      "ClientHost" : "localhost",
+      "ClientPort" : "10012",
+    "ClientMasPort" : "1041",
+      "BankName"   : "CitiBank"
+    },
+    {
+      "ClientId"   : "6",
+      "ClientHost" : "localhost",
+      "ClientPort" : "10014",
+      "ClientMasPort" : "1051",
+      "BankName"   : "CitiBank"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Failures": [
+        {
+            "FailureType" : "FailOnTransfer",
+            "BankName"  : "CitiBank",
+            "SendSeqNum"  : "3",
+            "Index" : "0"
+        },
+        {
+            "FailureType" : "FailOnTransfer",
+            "BankName"  : "JPMORGAN",
+            "SendSeqNum"  : "3",
+            "Index" : "2"
+        }
+      ]
+}

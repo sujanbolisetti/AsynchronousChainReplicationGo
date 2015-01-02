@@ -1,0 +1,29 @@
+{
+  "Requests" : [
+  {
+    "ReqId" : "123456789.1.18",
+    "AccountNumber" : "123451232",
+    "Operation" : "Query"
+  },
+  {
+    "ReqId" : "123456789.1.19",
+    "AccountNumber" : "123451232",
+    "Operation" : "Deposit",
+    "Amt" : "1000"
+  },
+  {
+    "ReqId" : "123456789.1.98",
+    "AccountNumber" : "123451232",
+    "Operation" : "Transfer",
+    "Amt"       : "600",
+    "DestBank"  : "CitiBank",
+    "DestAccount" : "123245645"
+  },
+  {
+    "ReqId" : "123456789.1.29",
+    "AccountNumber" : "123451232",
+    "Operation" : "Withdrawal",
+    "Amt" : "200"
+  }
+  ]
+}

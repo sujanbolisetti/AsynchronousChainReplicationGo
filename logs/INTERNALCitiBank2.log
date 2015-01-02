@@ -1,0 +1,15 @@
+2014/11/06 16:06:00 Send  Sequence Number: 1   PingedMaster
+2014/11/06 16:06:03 Send  Sequence Number: 2   PingedMaster
+2014/11/06 16:06:06 Send  Sequence Number: 3   PingedMaster
+2014/11/06 16:06:09 Send  Sequence Number: 4   PingedMaster
+2014/11/06 16:12:05 Received  Sequence Number: 1   {"CustName":"xx","Balance":500,"AccountType":"Saving","AccNumber":"123454234"}
+2014/11/06 16:12:05 {123454234 500 deposit}
+2014/11/06 16:12:05 Inserted the New Request in the list
+2014/11/06 16:12:05 Connecting to the Succesor :localhost:8074
+2014/11/06 16:12:05 Send  Sequence Number: 5   Identity Sent
+2014/11/06 16:58:59 Received  Sequence Number: 2   {"CustName":"xx","Balance":500,"AccountType":"Saving","AccNumber":"123454234"}
+2014/11/06 16:58:59 {123454234 500 deposit}
+2014/11/06 16:58:59 Inserted the New Request in the list
+2014/11/06 16:58:59 Connecting to the Succesor :localhost:8074
+2014/11/06 16:58:59 Send  Sequence Number: 6   Identity Sent
+2014/11/06 16:59:04 Send  Sequence Number: 7   0

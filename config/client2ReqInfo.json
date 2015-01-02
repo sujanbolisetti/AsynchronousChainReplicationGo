@@ -1,0 +1,21 @@
+{
+  "Requests" : [
+  {
+    "ReqId" : "123454235.1.7",
+    "AccountNumber" : "123454237",
+    "Operation" : "Query"
+  },
+  {
+    "ReqId" : "123454235.1.8",
+    "AccountNumber" : "123454238",
+    "Operation" : "Deposit",
+    "Amt" : "543"
+  },
+  {
+    "ReqId" : "123454235.1.9",
+    "AccountNumber" : "123454239",
+    "Operation" : "Withdrawal",
+    "Amt" : "512"
+  }
+  ]
+}
